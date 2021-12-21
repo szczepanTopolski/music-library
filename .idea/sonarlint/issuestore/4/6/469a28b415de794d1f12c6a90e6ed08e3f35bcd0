@@ -1,0 +1,5 @@
+
+p
+java:S1602"SRemove useless curly braces around statement and then remove useless return keyword(ÅĞù…8ïç¡ñİ/
+{
+java:S1488"^Immediately return this expression instead of assigning it to the temporary variable "albums".(ÅĞù…8òç¡ñİ/
