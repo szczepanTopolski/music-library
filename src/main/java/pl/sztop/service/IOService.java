@@ -4,6 +4,7 @@ import pl.sztop.model.Album;
 import pl.sztop.repository.mapper.Mapper;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -45,5 +46,9 @@ public class IOService {
                 .replaceAll(" ", "")
                 .split(",");
         return Mapper.mapToAlbum(line);
+    }
+
+    public static void displayStatistics(Map<String, Object> statistics) {
+        statistics.forEach((key, value) -> System.out.println(key + value));
     }
 }

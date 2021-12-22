@@ -3,6 +3,9 @@ package pl.sztop.model;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
+import pl.sztop.Utills;
+
+import java.time.LocalTime;
 
 @Builder
 @Getter
@@ -13,7 +16,7 @@ public class Album {
     private final String album_name;
     private final int releaseYear;
     private final String genre;
-    private final String duration;
+    private final LocalTime duration;
 
 
     public String[] getSimpleForm() {
@@ -21,6 +24,6 @@ public class Album {
                 album_name,
                 String.valueOf(releaseYear),
                 genre,
-                duration};
+                duration.format(Utills.TIME_FORMATTER)};
     }
 }
