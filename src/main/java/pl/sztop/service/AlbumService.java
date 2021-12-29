@@ -1,7 +1,7 @@
 package pl.sztop.service;
 
 import com.google.common.collect.Iterables;
-import pl.sztop.Utills;
+import pl.sztop.Utils;
 import pl.sztop.model.Album;
 import pl.sztop.repository.Repository;
 
@@ -51,7 +51,7 @@ public class AlbumService {
                 .distinct()
                 .collect(Collectors.toList());
 
-        Utills.tryParseInput(IOService.getInputFromPossibilities(findBy))
+        Utils.tryParseInput(IOService.getInputFromPossibilities(findBy))
                 .ifPresent(choose -> IOService.display(inMemoryCache.stream()
                         .filter(album -> by.apply(album).equals(findBy.get(choose - 1)))
                         .collect(Collectors.toList()), label)
@@ -71,7 +71,7 @@ public class AlbumService {
     }
 
     public void deleteAlbum() {
-        Utills.tryParseInput(IOService.getInputFromPossibilities(inMemoryCache))
+        Utils.tryParseInput(IOService.getInputFromPossibilities(inMemoryCache))
                 .ifPresent(index -> {
                             inMemoryCache.remove(index.intValue());
                             repository.saveAll(inMemoryCache, ALBUMS_CSV_PATH);

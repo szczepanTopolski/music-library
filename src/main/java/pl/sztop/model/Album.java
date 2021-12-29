@@ -4,7 +4,7 @@ import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
-import pl.sztop.Utills;
+import pl.sztop.Utils;
 
 import java.time.LocalTime;
 
@@ -26,6 +26,6 @@ public class Album {
                 album_name,
                 String.valueOf(releaseYear),
                 genre,
-                duration.format(Utills.TIME_FORMATTER)};
+                duration.format(Utils.TIME_FORMATTER)};
     }
 }

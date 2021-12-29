@@ -5,6 +5,8 @@ import pl.sztop.model.Album;
 
 import java.time.LocalTime;
 
+import static pl.sztop.repository.dictionary.Dictionary.*;
+
 public class Mapper {
     public static Album mapToAlbum(String[] data) {
         return Album.builder()
@@ -18,16 +20,16 @@ public class Mapper {
 
     public static Album mapToAlbum(CSVRecord record) {
         return Album.builder()
-                .author(record.get("author"))
-                .album_name(record.get("album_name"))
-                .releaseYear(Integer.parseInt(record.get("release_year")))
-                .genre(record.get("genre"))
-                .duration(mapDuration(record.get("duration")))
+                .author(record.get(CSV_AUTHOR_HEADER))
+                .album_name(record.get(CSV_ALBUM_NAME_HEADER))
+                .releaseYear(Integer.parseInt(record.get(CSV_RELEASE_YEAR_HEADER)))
+                .genre(record.get(CSV_GENRE_HEADER))
+                .duration(mapDuration(record.get(CSV_DURATION_HEADER)))
                 .build();
     }
 
     public static LocalTime mapDuration(String durationString) {
-        String[] duration = durationString.split(":");
+        String[] duration = durationString.split(CSV_DURATION_REGEX);
         final int HOURS_INDEX = 0;
         final int MINUTES_INDEX = 1;
         final int SECONDS_INDEX = 2;

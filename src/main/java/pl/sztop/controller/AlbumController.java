@@ -1,6 +1,6 @@
 package pl.sztop.controller;
 
-import pl.sztop.Utills;
+import pl.sztop.Utils;
 import pl.sztop.service.AlbumService;
 import pl.sztop.service.IOService;
 
@@ -30,7 +30,7 @@ public class AlbumController {
         while (true) {
             IOService.display(options, "\n Menu: ");
             String input = IOService.getUserInput("What do you want to do?:");
-            Utills.tryParseInput(input).ifPresent(integer -> menu.get(integer).run());
+            Utils.tryParseInput(input).ifPresent(integer -> menu.get(integer).run());
         }
     }
 
