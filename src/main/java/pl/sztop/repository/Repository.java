@@ -22,7 +22,7 @@ public class Repository {
     private final static String[] HEADERS = {"author", "album_name", "release_year", "genre", "duration"};
     private final static char CSV_DELIMITER = ',';
 
-    public List<Album> importAlbums(String fileName) {
+    public List<Album> findAll(String fileName) {
         try {
             Reader in = new FileReader(fileName);
 
@@ -42,7 +42,7 @@ public class Repository {
         }
     }
 
-    public void exportAlbums(List<Album> albums, String fileName) {
+    public void saveAll(List<Album> albums, String fileName) {
         try (CSVPrinter printer = new CSVPrinter(new FileWriter(fileName), CSVFormat.newFormat(CSV_DELIMITER)
                 .withHeader(HEADERS))) {
             printer.print("\n");

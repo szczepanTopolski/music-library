@@ -24,7 +24,7 @@ public class AlbumService {
 
 
     public void synchronizeAlbums() {
-        this.inMemoryCache = repository.importAlbums(ALBUMS_CSV_PATH);
+        this.inMemoryCache = repository.findAll(ALBUMS_CSV_PATH);
     }
 
     public void displayAlbums() {
@@ -40,9 +40,8 @@ public class AlbumService {
     }
 
     public void addAlbum() {
-        synchronizeAlbums();
         inMemoryCache.add(IOService.albumFromInput());
-        repository.exportAlbums(inMemoryCache, ALBUMS_CSV_PATH);
+        repository.saveAll(inMemoryCache, ALBUMS_CSV_PATH);
     }
 
     private void find(Function<Album, String> by, String label) {
@@ -69,6 +68,15 @@ public class AlbumService {
         if (longest == null || shortest == null) return;
         final Map.Entry<String, Long> mostFrequent = mostFrequent(Album::getAuthor);
         IOService.displayStatistics(createStatisticsMap(longest, shortest, mostFrequent));
+    }
+
+    public void deleteAlbum() {
+        Utills.tryParseInput(IOService.getInputFromPossibilities(inMemoryCache))
+                .ifPresent(index -> {
+                            inMemoryCache.remove(index.intValue());
+                            repository.saveAll(inMemoryCache, ALBUMS_CSV_PATH);
+                        }
+                );
     }
 
     private List<Album> getAlbumsByAuthor(String author) {

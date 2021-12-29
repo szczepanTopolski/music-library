@@ -1,6 +1,7 @@
 package pl.sztop.model;
 
 import lombok.Builder;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
 import pl.sztop.Utills;
@@ -10,6 +11,7 @@ import java.time.LocalTime;
 @Builder
 @Getter
 @ToString
+@EqualsAndHashCode(exclude = "duration")
 public class Album {
 
     private final String author;

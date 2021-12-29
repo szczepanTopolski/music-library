@@ -30,7 +30,7 @@ public class IOService {
         System.out.println("Something got kurwa wrong, cause: " + cause);
     }
 
-    public static String getInputFromPossibilities(List<String> list) {
+    public static String getInputFromPossibilities(List<?> list) {
         display(list, "\n Choose from possibilities: ");
         return getUserInput("Your input: ");
     }

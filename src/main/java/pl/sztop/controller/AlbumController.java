@@ -21,6 +21,7 @@ public class AlbumController {
                 "Find by genre.",
                 "Find by author",
                 "Add new album.",
+                "Remove album.",
                 "Display statistics.",
                 "Exit");
     }
@@ -41,8 +42,9 @@ public class AlbumController {
         menu.put(3, service::findByGenre);
         menu.put(4, service::findByAuthor);
         menu.put(5, service::addAlbum);
-        menu.put(6, service::displayStatistics);
-        menu.put(7, service::exit);
+        menu.put(6, service::deleteAlbum);
+        menu.put(7, service::displayStatistics);
+        menu.put(8, service::exit);
         return menu;
     }
 }
