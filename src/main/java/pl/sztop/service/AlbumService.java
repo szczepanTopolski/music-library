@@ -51,7 +51,7 @@ public class AlbumService {
                 .distinct()
                 .collect(Collectors.toList());
 
-        Utils.tryParseInput(IOService.getInputFromPossibilities(findBy))
+        Utils.tryParseInput(IOService.getInputFromPossibilities(findBy), findBy.size())
                 .ifPresent(choose -> IOService.display(inMemoryCache.stream()
                         .filter(album -> by.apply(album).equals(findBy.get(choose - 1)))
                         .collect(Collectors.toList()), label)
@@ -71,7 +71,7 @@ public class AlbumService {
     }
 
     public void deleteAlbum() {
-        Utils.tryParseInput(IOService.getInputFromPossibilities(inMemoryCache))
+        Utils.tryParseInput(IOService.getInputFromPossibilities(inMemoryCache), inMemoryCache.size())
                 .ifPresent(index -> {
                             inMemoryCache.remove(index.intValue());
                             repository.saveAll(inMemoryCache, ALBUMS_CSV_PATH);

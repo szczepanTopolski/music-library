@@ -3,6 +3,7 @@ package pl.sztop.service;
 import pl.sztop.model.Album;
 import pl.sztop.repository.mapper.Mapper;
 
+import java.io.PrintStream;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
@@ -10,24 +11,38 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class IOService {
 
-    static Scanner sc = new Scanner(System.in);
+    static Scanner sc;
+    static PrintStream out;
+
+    static {
+        sc = new Scanner(System.in);
+        out = System.out;
+    }
+
+    public static void setOutput(PrintStream output) {
+        out = output;
+    }
+
+    public static void setInput(Scanner input) {
+        sc = input;
+    }
 
     public static <T> void display(List<T> list, String label) {
-        System.out.println(label);
+        out.println(label);
         AtomicInteger counter = new AtomicInteger(1);
         list.forEach(line -> {
-            System.out.printf("(%d). %s%n", counter.get(), line);
+            out.printf("(%d). %s%n", counter.get(), line);
             counter.getAndIncrement();
         });
     }
 
     public static String getUserInput(String message) {
-        System.out.println(message);
+        out.println(message);
         return sc.nextLine();
     }
 
     public static void displayErrorMessage(String cause) {
-        System.out.println("Something got kurwa wrong, cause: " + cause);
+        out.println("Something got kurwa wrong, cause: " + cause);
     }
 
     public static String getInputFromPossibilities(List<?> list) {
@@ -39,9 +54,9 @@ public class IOService {
 
         String[] line = getUserInput(
                 """
-                Insert in correct pattern []
-                [ author, album name, release year, genre, duration]:
-                """
+                        Insert in correct pattern []
+                        [ author, album name, release year, genre, duration]:
+                        """
         )
                 .replaceAll(" ", "")
                 .split(",");
@@ -49,6 +64,6 @@ public class IOService {
     }
 
     public static void displayStatistics(Map<String, Object> statistics) {
-        statistics.forEach((key, value) -> System.out.println(key + value));
+        statistics.forEach((key, value) -> out.println(key + value));
     }
 }

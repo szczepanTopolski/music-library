@@ -30,7 +30,7 @@ public class AlbumController {
         while (true) {
             IOService.display(options, "\n Menu: ");
             String input = IOService.getUserInput("What do you want to do?:");
-            Utils.tryParseInput(input).ifPresent(integer -> menu.get(integer).run());
+            Utils.tryParseInput(input, menu.size()).ifPresent(integer -> menu.get(integer).run());
         }
     }
 
