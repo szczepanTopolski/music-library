@@ -44,7 +44,7 @@ public class AlbumService {
         repository.saveAll(inMemoryCache, ALBUMS_CSV_PATH);
     }
 
-    private void find(Function<Album, String> by, String label) {
+    void find(Function<Album, String> by, String label) {
         List<String> findBy = inMemoryCache
                 .stream()
                 .map(by)
@@ -64,7 +64,7 @@ public class AlbumService {
                 .sorted(Comparator.comparing(Album::getDuration))
                 .collect(Collectors.toList());
         Album longest = Iterables.getLast(sorted);
-        Album shortest = Iterables.getFirst(sorted, Album.builder().build());
+        Album shortest = Iterables.getFirst(sorted, null);
         if (longest == null || shortest == null) return;
         final Map.Entry<String, Long> mostFrequent = mostFrequent(Album::getAuthor);
         IOService.displayStatistics(createStatisticsMap(longest, shortest, mostFrequent));
