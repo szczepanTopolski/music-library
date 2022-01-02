@@ -51,12 +51,12 @@ class AlbumServiceTest {
 
     @Test
     public void should_find_by_author() {
-        //given
+        //arrange
         Function<Album, String> by = Album::getAuthor;
         String input = "1";
         final String label = "Authors:";
         String expected = String.format("(1). %s", FakeRepository.createAlbum(0).toString());
-        //arrange
+        //act
         InputStream in = new ByteArrayInputStream(input.getBytes());
         IOService.setInput(new Scanner(in));
         albumService.find(by, label);
@@ -68,11 +68,11 @@ class AlbumServiceTest {
     @ParameterizedTest
     @MethodSource("valuesProvider")
     public void find_by_author_should_display_error_message_when_incorrect_input(String input) {
-        //given
+        //arrange
         Function<Album, String> by = Album::getAuthor;
         final String label = "Your input:";
         String expected = "Something got kurwa wrong, cause: Invalid input - try again.";
-        //arrange
+        //act
         InputStream in = new ByteArrayInputStream(input.getBytes());
         IOService.setInput(new Scanner(in));
         albumService.find(by, label);
